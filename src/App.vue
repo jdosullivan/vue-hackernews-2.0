@@ -5,6 +5,7 @@
         <router-link to="/" exact>
           <img class="logo" src="~public/logo-48.png" alt="logo">
         </router-link>
+        <span class="subtext">Stories behind stock swings</span>
       </div>
     </div>
     <transition name="fade" mode="out-in">
@@ -60,9 +61,11 @@ a
     font-size .9em
     margin 0
     float right
+  .subtext
+    color #fff
 
 .logo
-  width 24px
+  width 180px
   margin-right 10px
   display inline-block
   vertical-align middle
