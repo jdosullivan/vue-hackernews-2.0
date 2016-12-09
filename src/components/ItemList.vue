@@ -46,7 +46,17 @@ export default {
       // we need these local state so that we can precisely control the timing
       // of the transitions.
       displayedPage: isInitialRender ? Number(this.$store.state.route.params.page) || 1 : -1,
-      displayedItems: isInitialRender ? this.$store.getters.activeItems : []
+      displayedItems: [ 
+      { 
+        id:13130711,
+        title:"Worried 2 About the Privacy of Your Messages? Download Signal",  
+        type:"story", 
+        by:"JumpCrisscross", 
+        comments:186, 
+        score:216, 
+        time:1481209703,
+        url:"http://www.nytimes.com/2016/12/07/technology/personaltech/worried-about-the-privacy-of-your-messages-download-signal.html?em_pos=small&emc=edit_dk_20161208&nl=dealbook&nl_art=4&nlid=65508833&ref=headline&te=1"
+      }] //isInitialRender ? this.$store.getters.activeItems : []
     }
   },
 
@@ -64,7 +74,7 @@ export default {
   },
 
   beforeMount () {
-    if (this.$root._isMounted) {
+    /*if (this.$root._isMounted) {
       this.loadItems(this.page)
     }
     // watch the current list for realtime updates
@@ -73,7 +83,7 @@ export default {
       this.$store.dispatch('ENSURE_ACTIVE_ITEMS').then(() => {
         this.displayedItems = this.$store.getters.activeItems
       })
-    })
+    }) */
   },
 
   beforeDestroy () {
