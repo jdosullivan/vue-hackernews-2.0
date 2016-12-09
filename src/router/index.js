@@ -6,6 +6,7 @@ Vue.use(Router)
 import { createListView } from '../views/CreateListView'
 import ItemView from '../views/ItemView.vue'
 import UserView from '../views/UserView.vue'
+import StockList from '../views/StockList.vue'
 
 export default new Router({
   mode: 'history',
@@ -18,7 +19,7 @@ export default new Router({
     { path: '/job/:page(\\d+)?', component: createListView('job') },
     { path: '/item/:id(\\d+)', component: ItemView },
     { path: '/user/:id', component: UserView },*/
-    { path: '/', component: createListView('top') }
+    { path: '/', component: StockList }
     /*{ path: '/', redirect: '/top' }*/
   ]
 })
