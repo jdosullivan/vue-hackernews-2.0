@@ -1,15 +1,20 @@
 <template>
   <div class="news-view">
-    <spinner :show="loading"></spinner>
+    <spinner :show="loading"></spinner>    
     <div class="news-list-nav">
-      <router-link v-if="page > 1" :to="'/' + type + '/' + (page - 1)">&lt; prev</router-link>
-      <a v-else class="disabled">&lt; prev</a>
-      <span>{{ page }}/{{ maxPage }}</span>
-      <router-link v-if="hasMore" :to="'/' + type + '/' + (page + 1)">more &gt;</router-link>
-      <a v-else class="disabled">more &gt;</a>
+      <router-link to="/">Today</router-link>
+      <router-link to="today">Yesterday</router-link>
+      <router-link to="today">Specific day</router-link>
     </div>
     <transition :name="transition">
       <div class="news-list" :key="displayedPage" v-if="displayedPage > 0">
+        <h2 class="dateHeader">
+          <span class="time">Thursday, December 8th 2016</span>
+        </h2>
+        <div class="dirLinks">
+          <router-link to="up" class="uplink">Up</router-link>
+          <router-link to="down" class="downlink">Down</router-link>
+        <div>
         <transition-group tag="ul" name="item">
           <item v-for="item in displayedItems" :key="item.id" :item="item">
           </item>
@@ -49,14 +54,33 @@ export default {
       displayedItems: [ 
       { 
         id:13130711,
-        title:"Worried 2 About the Privacy of Your Messages? Download Signal",  
         type:"story", 
         by:"JumpCrisscross", 
         comments:186, 
-        score:216, 
+        symbol:"WYNN", 
+        direction: "down",
+        percent: "11.05",
         time:1481209703,
-        url:"http://www.nytimes.com/2016/12/07/technology/personaltech/worried-about-the-privacy-of-your-messages-download-signal.html?em_pos=small&emc=edit_dk_20161208&nl=dealbook&nl_art=4&nlid=65508833&ref=headline&te=1"
-      }] //isInitialRender ? this.$store.getters.activeItems : []
+        stories:[ 
+          { title: "Fears of Beijing gambling crackdown sends casino stocks crashing", url: "http://www.reuters.com/article/us-china-gaming-idUSKBN13Y05V?feedType=RSS&feedName=businessNews&utm_source=Twitter&utm_medium=Social&utm_campaign=Feed%3A+reuters%2FbusinessNews+%28Business+News%29"},
+          { title: "What's the financial impact As China Caps ATM Withdrawal?", url: "http://blogs.barrons.com/asiastocks/2016/12/08/macau-gaming-whats-the-impact-as-china-caps-atm-withdrawal/"}
+        ]
+      },
+      { 
+        id:13130712,
+        type:"story", 
+        by:"JumpCrisscross", 
+        comments:186, 
+        symbol:"WYNN", 
+        direction: "up",
+        percent: "11.05",
+        time:1481209703,
+        stories:[ 
+          { title: "Fears of Beijing gambling crackdown sends casino stocks crashing", url: "http://www.reuters.com/article/us-china-gaming-idUSKBN13Y05V?feedType=RSS&feedName=businessNews&utm_source=Twitter&utm_medium=Social&utm_campaign=Feed%3A+reuters%2FbusinessNews+%28Business+News%29"},
+          { title: "What's the financial impact As China Caps ATM Withdrawal?", url: "http://blogs.barrons.com/asiastocks/2016/12/08/macau-gaming-whats-the-impact-as-china-caps-atm-withdrawal/"}
+        ]
+      }
+      ] //isInitialRender ? this.$store.getters.activeItems : []
     }
   },
 
@@ -87,7 +111,7 @@ export default {
   },
 
   beforeDestroy () {
-    this.unwatchList()
+    // this.unwatchList()
   },
 
   watch: {
@@ -118,10 +142,21 @@ export default {
 }
 </script>
 
-<style lang="stylus">
-.news-view
-  padding-top 45px
+<style>
+  .dateHeader {
+    text-align: center;
+  }
 
+  .dirLinks {
+    text-align: center;
+  }
+
+  .dirLinks a {
+    margin-right: 10px;
+  }
+</style>
+
+<style lang="stylus">
 .news-list-nav, .news-list
   background-color #fff
   border-radius 2px
@@ -129,8 +164,8 @@ export default {
 .news-list-nav
   padding 15px 30px
   position fixed
-  text-align center
   top 55px
+  text-align center
   left 0
   right 0
   z-index 998
@@ -142,7 +177,7 @@ export default {
 
 .news-list
   position absolute
-  margin 30px 0
+  margin 60px 0
   width 100%
   transition all .5s cubic-bezier(.55,0,.1,1)
   ul
